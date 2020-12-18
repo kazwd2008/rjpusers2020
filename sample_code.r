@@ -40,18 +40,18 @@ assign(dname[1], dt1$GET_STATS_DATA$STATISTICAL_DATA$DATA_INF$VALUE)
 for (i in 2:rp1){
     url <- paste("http://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?appId=",
            yourAPPID,                     # アプリケーションID
-           	"&lang=J",
-			"&statsDataId=0003125169",	  # 取得する表のID(半角)
-			"&startPosition=", NKey,      # データ取得の開始点
-			"&metaGetFlg=Y",			  
-			"&cntGetFlg=N",
-			"&sectionHeaderFlg=1", sep="")
-	dt0 <- getURL(url)              	  # 同じ領域を再利用
-	dt1 <- fromJSON(dt0)
-	# 利用する部分だけ確保した領域に保存する
-	assign(dname[i], dt1$GET_STATS_DATA$STATISTICAL_DATA$DATA_INF$VALUE)
-	# データ取得の開始ポイントを更新
-	NKey  <- dt1$GET_STATS_DATA$STATISTICAL_DATA$RESULT_INF$NEXT_KEY
+           "&lang=J",
+	   "&statsDataId=0003125169",	  # 取得する表のID(半角)
+	   "&startPosition=", NKey,      # データ取得の開始点
+	   "&metaGetFlg=Y",			  
+	   "&cntGetFlg=N",
+	   "&sectionHeaderFlg=1", sep="")
+     dt0 <- getURL(url)              	  # 同じ領域を再利用
+     dt1 <- fromJSON(dt0)
+     # 利用する部分だけ確保した領域に保存する
+     assign(dname[i], dt1$GET_STATS_DATA$STATISTICAL_DATA$DATA_INF$VALUE)
+     # データ取得の開始ポイントを更新
+     NKey  <- dt1$GET_STATS_DATA$STATISTICAL_DATA$RESULT_INF$NEXT_KEY
 }    # この処理には数分かかる
 
 #--------------------------------------------------------------------
@@ -105,8 +105,8 @@ for (i in 1:rp1){
 	                      & (area %in% s.area$X.code) & (time %in% s.tm$X.code))
 
     c1 <- match(dat1$area,  s.area$X.code)
-	c2 <- match(dat1$cat01, s.itm$X.code)
-	c3 <- match(dat1$time,  s.tm$X.code)
+    c2 <- match(dat1$cat01, s.itm$X.code)
+    c3 <- match(dat1$time,  s.tm$X.code)
     f.err[i,1] <- length(which(is.na(c1)))
     f.err[i,2] <- length(which(is.na(c2)))
     f.err[i,3] <- length(which(is.na(c3)))
