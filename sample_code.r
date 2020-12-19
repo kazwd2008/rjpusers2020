@@ -158,8 +158,8 @@ Mn5.d <- dist(Mn5.s)
 Md5.d <- dist(Md5.s)
 
 # Ward法でクラスタリング
-Mn5.hc <- hclust(Mn5.d, method="ward.D")
-Md5.hc <- hclust(Md5.d, method="ward.D")
+Mn5.hc <- hclust(Mn5.d, method="ward.D2")
+Md5.hc <- hclust(Md5.d, method="ward.D2")
 
 # クラスター数を決める
 (Mn5.hc.c12 <- cutree(Mn5.hc, k=12))
@@ -205,30 +205,32 @@ s.itm$X.name # 終端品目のコード表
 
 # 平均値による分類に影響が大きい品目
 #[35] " 塩さけ"
+#[14] " まぐろ" 
 #[172] " しゅうまい" 
-#[22] " たい" 
+#[192] "他の飲料のその他(2014年までは38Yを含む)"
 
 # 中央値による分類に影響が大きい品目
 #[167] " うなぎのかば焼き"
 #[135] " ソース"  
-#[51] " 鶏肉"   
+#[7] " 中華麺"
 
 # 該当品目と閾値
 dev.new(width=24, height=16)
-par(mfrow=c(3,2), mar=c(8,4,4,0))	# par(mar=c(5,4,4,2))
+par(mfrow=c(4,2), mar=c(8,4,4,0))	# par(mar=c(5,4,4,2))
 barplot(Mn5[,35], las=2, col=pl[Mn5.hc.c12], main=colnames(Mn5)[35])
  abline(h=1251, col="gray")
 barplot(Md5[,167], las=2, col=pl[Md5.hc.c12], main=colnames(Md5)[167])
  abline(h=2428, col="gray", lty=3)
-barplot(Mn5[,172], las=2, col=pl[Mn5.hc.c12], main=colnames(Mn5)[172])
- abline(h=694, col="gray")
- abline(h=1076, col="gray")
-barplot(Md5[,135], las=2, col=pl[Mn5.hc.c12], main=colnames(Md5)[46])
+barplot(Mn5[,14], las=2, col=pl[Mn5.hc.c12], main=colnames(Mn5)[14])
+ abline(h=3153, col="gray")
+barplot(Md5[,135], las=2, col=pl[Mn5.hc.c12], main=colnames(Md5)[135])
  abline(h=792, col="gray", lty=3)
-barplot(Mn5[,22], las=2, col=pl[Mn5.hc.c12], main=colnames(Mn5)[22])
- abline(h=598, col="gray")
-barplot(Md5[,51], las=2, col=pl[Mn5.hc.c12], main=colnames(Md5)[51])
- abline(h=16900, col="gray")
+barplot(Mn5[,172], las=2, col=pl[Mn5.hc.c12], main=colnames(Mn5)[172])
+ abline(h=1076, col="gray")
+barplot(Md5[,7], las=2, col=pl[Mn5.hc.c12], main=colnames(Md5)[7])
+ abline(h=3475, col="gray")
+barplot(Mn5[,192], las=2, col=pl[Mn5.hc.c12], main=colnames(Mn5)[192])
+ abline(h=6038, col="gray")
  
 #--------------------------------------------------------------------
 # 東西日本を分ける食料品目 
@@ -274,10 +276,4 @@ dev.new(width=16, height=10)	# [52] 合いびき肉"
 par(mar=c(8,4,4,0))	# par(mar=c(5,4,4,2))
 barplot(tb0[,52,5], las=2, col=rg1, main=colnames(dx0)[52])
 abline(h=2923, col="gray")
-
-
-
-
-
-
 
